@@ -10,12 +10,8 @@ onMounted(() => inputRef.value.focus());
 const { getAllDataUser } = useFetch();
 
 const handleSubmit = () => {
-  if (!username.value) return;
-
   getAllDataUser(username.value);
-
   username.value = "";
-
   inputRef.value.focus();
 };
 </script>
@@ -25,7 +21,13 @@ const handleSubmit = () => {
     <h1>GitHub Info</h1>
     <form @submit.prevent="handleSubmit">
       <label for="username">Usuário: </label>
-      <input type="text" id="username" v-model="username" ref="inputRef" />
+      <input
+        type="text"
+        id="username"
+        v-model="username"
+        ref="inputRef"
+        required
+      />
       <button type="submit">Buscar</button>
     </form>
   </header>
