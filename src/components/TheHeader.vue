@@ -1,8 +1,13 @@
 <script setup>
+import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 import { useFetch } from "../composables/fetch";
+import { useUserStore } from "../stores/user";
 
+const store = useUserStore();
+const { user, userRepositories } = storeToRefs(store);
 const username = ref("");
+
 const inputRef = ref(null);
 
 onMounted(() => inputRef.value.focus());
@@ -10,7 +15,11 @@ onMounted(() => inputRef.value.focus());
 const { getAllDataUser } = useFetch();
 
 const handleSubmit = () => {
+  user.value = "";
+  userRepositories.value = [];
+
   getAllDataUser(username.value);
+
   username.value = "";
   inputRef.value.focus();
 };
@@ -40,7 +49,7 @@ const handleSubmit = () => {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 form {

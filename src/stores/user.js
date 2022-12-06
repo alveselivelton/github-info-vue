@@ -2,8 +2,9 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", () => {
-  let user = ref([]);
-  let userRepositories = ref([]);
+  const user = ref([]);
+  const userRepositories = ref([]);
+  const loading = ref(false);
 
-  return { user, userRepositories };
+  return { user, userRepositories, loading };
 });

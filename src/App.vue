@@ -1,16 +1,18 @@
 <script setup>
 import TheHeader from "./components/TheHeader.vue";
 import CardData from "./components/CardData.vue";
+import TheLoading from "./components/TheLoading.vue";
 import { useUserStore } from "./stores/user";
 import { storeToRefs } from "pinia";
 
 const store = useUserStore();
-const { user } = storeToRefs(store);
+const { user, loading } = storeToRefs(store);
 </script>
 
 <template>
   <div class="container">
     <TheHeader />
+    <TheLoading v-if="loading" />
     <CardData v-if="user.name" />
   </div>
 </template>

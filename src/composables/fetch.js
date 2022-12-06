@@ -4,7 +4,7 @@ import { useUserStore } from "../stores/user";
 export const useFetch = () => {
   const store = useUserStore();
 
-  const { user, userRepositories } = storeToRefs(store);
+  const { user, userRepositories, loading } = storeToRefs(store);
 
   const api = "https://api.github.com/users/";
   const headers = {
@@ -34,9 +34,11 @@ export const useFetch = () => {
     }
   };
 
-  const getAllDataUser = (username) => {
-    getUserRepositories(username);
-    getUser(username);
+  const getAllDataUser = async (username) => {
+    loading.value = true;
+    await getUserRepositories(username);
+    await getUser(username);
+    loading.value = false;
   };
 
   return { getAllDataUser };
