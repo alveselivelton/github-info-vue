@@ -1,24 +1,22 @@
 <script setup>
 import { storeToRefs } from "pinia";
-import { onMounted, ref } from "vue";
-import { useFetch } from "../composables/fetch";
+import { ref } from "vue";
 import { useUserStore } from "../stores/user";
 
 const store = useUserStore();
 const { user, userRepositories } = storeToRefs(store);
+const { getUser, getUserRepositories } = store;
+
 const username = ref("");
 
 const inputRef = ref(null);
 
-onMounted(() => inputRef.value.focus());
-
-const { getAllDataUser } = useFetch();
-
-const handleSubmit = () => {
+const handleSubmit = async () => {
   user.value = "";
   userRepositories.value = [];
 
-  getAllDataUser(username.value);
+  await getUser(username.value);
+  getUserRepositories(username.value);
 
   username.value = "";
   inputRef.value.focus();
@@ -36,6 +34,7 @@ const handleSubmit = () => {
         v-model="username"
         ref="inputRef"
         required
+        autofocus
       />
       <button type="submit">Buscar</button>
     </form>

@@ -39,11 +39,11 @@ const { user, userRepositories } = storeToRefs(store);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+  padding: 20px 25px;
   background-color: #817777;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  padding: 20px 0;
 }
 
 .user img {
@@ -94,11 +94,14 @@ const { user, userRepositories } = storeToRefs(store);
   font-size: 18px;
   text-decoration: none;
   color: #242424;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
   transition: 0.3s;
 }
 
 .repositories ul li a:hover {
   color: #000;
+  border-bottom: 1px solid #000;
 }
 
 @media (max-width: 630px) {
